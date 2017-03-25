@@ -12,7 +12,7 @@ def lyrical(artist, title):
     wf = word_frequencies(artist, title)
     return render_template('wordcloud.html', words=wf)
 
-@app.context_processor
+"""@app.context_processor
 def override_url_for():
     return dict(url_for=dated_url_for)
 
@@ -23,7 +23,7 @@ def dated_url_for(endpoint, **values):
             file_path = os.path.join(app.root_path,
                                      endpoint, filename)
             values['q'] = int(os.stat(file_path).st_mtime)
-    return url_for(endpoint, **values)
+    return url_for(endpoint, **values)"""
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -31,6 +31,6 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    app.debug = True
+    #app.debug = True
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
