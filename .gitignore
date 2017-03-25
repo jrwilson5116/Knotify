@@ -1,4 +1,8 @@
 __pycache__/*
 \#*
 config.json
+local*
+bin*
+include*
+lib*
 
