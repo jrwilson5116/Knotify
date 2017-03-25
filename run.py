@@ -1,10 +1,16 @@
 import os
 from flask import Flask, render_template, url_for
+from lyrics import word_frequencies
 app = Flask(__name__, static_url_path='')
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/wordcloud/<artist>/<title>')
+def lyrical(artist, title):
+    wf = word_frequencies(artist, title)
+    return render_template('wordcloud.html', words=wf)
 
 @app.context_processor
 def override_url_for():
