@@ -12,28 +12,7 @@
     <script src="{{ url_for('static',filename='js/lib/d3/d3.layout.cloud.js') }}"></script>
     <script src="{{ url_for('static', filename='js/d3.wordcloud.js') }}"></script>
     <script>
-     (function() {
-       var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-       var audioElement = document.getElementById('audioElement');
-       var audioSrc = audioCtx.createMediaElementSource(audioElement);
-       var analyser = audioCtx.createAnalyser();
-
-       // bind analyser to media element source
-       audioSrc.connect(analyser);
-       audioSrc.connect(audioCtx.destination);
        
-       var svgHeight = '1200';
-       var svgWidth = '600';
-       
-       function createSvg(parent, height, width) {
-         return d3.select(parent).append('svg').attr('height', height).attr('width', width);
-       }
-       var svg = createSvg('body', svgHeight, svgWidth);
-       
-       function render() {
-         requestAnimationFrame(render);
-         svg.selectAll("wordcloudsvg").exit().remove();
-       }
        d3.wordcloud()
          .size([1200, 600])
          .selector('#wordcloud')
@@ -44,8 +23,6 @@
            {text: '', size: 0}
          ])
          .start();
-       render();
-     }());
     </script>
   </body>
 </html>

@@ -71,7 +71,6 @@
           h = layout.size()[1];
 
       svg.attr("width", w).attr("height", h);
-      svg.attr("id","wordcloudsvg")
 
       scaling = bounds ? Math.min(
         w / Math.abs(bounds[1].x - w / 2),
