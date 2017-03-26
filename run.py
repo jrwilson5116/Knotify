@@ -12,6 +12,21 @@ def lyrical(artist, title):
     wf = word_frequencies(artist, title)
     return render_template('wordcloud.html', words=wf)
 
+@app.route('/demo1')
+def demo1():
+    wf = word_frequencies("","")
+    return render_template('demo1.html', words=wf, song="")
+
+@app.route('/demo2')
+def demo2():
+    wf = word_frequencies("","")
+    return render_template('demo2.html', words=wf, song="")
+
+@app.route('/demo3')
+def demo3():
+    wf = word_frequencies("","")
+    return render_template('demo3.html', words=wf, song="")
+
 """@app.context_processor
 def override_url_for():
     return dict(url_for=dated_url_for)
@@ -31,6 +46,6 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    #app.debug = True
+    app.debug = True
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
