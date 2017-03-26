@@ -13,16 +13,33 @@
     <script src="{{ url_for('static', filename='js/d3.wordcloud.js') }}"></script>
     <script>
        
-       d3.wordcloud()
-         .size([1200, 600])
-         .selector('#wordcloud')
-         .words([
-           {% for word in words %}
-           {text: '{{ word[0] }}', size: {{ word[1] }}},
-           {% endfor %}
-           {text: '', size: 0}
-         ])
-         .start();
+     d3.wordcloud()
+       .size([1200, 600])
+       .selector('#wordcloud')
+       .words([
+         {% for word in words %}
+         {text: '{{ word[0] }}', size: {{ word[1] }}},
+         {% endfor %}
+         {text: '', size: 0}
+       ])
+       .start();
+
+     document.getElementsByTagName('svg')[0].id = '_id'
+     setInterval(function(){ 
+       var svg = document.getElementById('_id');
+       svg.parentNode.removeChild(svg);
+     d3.wordcloud()
+       .size([1200, 600])
+       .selector('#wordcloud')
+       .words([
+         {% for word in words %}
+         {text: '{{ word[0] }}', size: {{ word[1] }}},
+         {% endfor %}
+         {text: '', size: 0}
+       ])
+       .start();
+     document.getElementsByTagName('svg')[0].id = '_id'
+     }, 1000);
     </script>
   </body>
 </html>
