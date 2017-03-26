@@ -4,7 +4,6 @@
     <title>Knotify</title>
   </head>
   <body>
-    <audio id="audioElement" src=" {{ url_for('static', filename='mp3/') }}"></audio>
     <div id="wordcloud"></div>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -13,38 +12,16 @@
     <script src="{{ url_for('static', filename='js/d3.wordcloud.js') }}"></script>
     <script>
      (function() {
-       var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-       var audioElement = document.getElementById('audioElement');
-       var audioSrc = audioCtx.createMediaElementSource(audioElement);
-       var analyser = audioCtx.createAnalyser();
-
-       // bind analyser to media element source
-       audioSrc.connect(analyser);
-       audioSrc.connect(audioCtx.destination);
-       
-       var svgHeight = '1200';
-       var svgWidth = '600';
-       
-       function createSvg(parent, height, width) {
-         return d3.select(parent).append('svg').attr('height', height).attr('width', width);
-       }
-       var svg = createSvg('body', svgHeight, svgWidth);
-       
-       function render() {
-         requestAnimationFrame(render);
-         
-         d3.wordcloud()
-           .size([1200, 600])
-           .selector('#wordcloud')
-           .words([
-             {% for word in words %}
-             {text: '{{ word[0] }}', size: {{ word[1] }}},
-             {% endfor %}
-             {text: '', size: 0}
-           ])
-           .start();
-       }
-       render();
+       d3.wordcloud()
+         .size([1200, 600])
+         .selector('#wordcloud')
+         .words([
+           {% for word in words %}
+           {text: '{{ word[0] }}', size: {{ word[1] }}},
+           {% endfor %}
+           {text: '', size: 0}
+         ])
+         .start();
      }());
     </script>
   </body>

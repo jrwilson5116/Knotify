@@ -14,18 +14,18 @@ def lyrical(artist, title):
 
 @app.route('/demo1')
 def demo1():
-    wf = word_frequencies("","")
-    return render_template('demo1.html', words=wf, song="")
+    wf = word_frequencies("daft punk","harderbetterfasterstronger")
+    return render_template('demo1.html', words=wf, song="mp3/daft.mp3")
 
 @app.route('/demo2')
 def demo2():
-    wf = word_frequencies("","")
-    return render_template('demo2.html', words=wf, song="")
+    wf = word_frequencies("rachel platten","fightsong")
+    return render_template('demo2.html', words=wf, song="mp3/fight.mp3")
 
 @app.route('/demo3')
 def demo3():
-    wf = word_frequencies("","")
-    return render_template('demo3.html', words=wf, song="")
+    wf = word_frequencies("the beatles","yellow submarine")
+    return render_template('demo3.html', words=wf, song="mp3/yellow.mp3")
 
 """@app.context_processor
 def override_url_for():
