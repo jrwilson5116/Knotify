@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Knotify</title>
+  </head>
+  <body>
+    <audio id="audioElement" src=" {{ url_for('static', filename='mp3/yellow.mp3') }}"></audio>
+    <div id="wordcloud"></div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/lib/d3/d3.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/lib/d3/d3.layout.cloud.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/d3.wordcloud.js') }}"></script>
+    <script>
+     d3.wordcloud()
+       .size([1200, 600])
+       .selector('#wordcloud')
+       .words([
+         {% for word in words %}
+         {text: '{{ word[0] }}', size: {{ word[1] }}},
+         {% endfor %}
+         {text: '', size: 0}
+       ])
+       .start();
+
+     document.getElementsByTagName('svg')[0].id = '_id'
+     setInterval(function(){ 
+       var svg = document.getElementById('_id');
+       svg.parentNode.removeChild(svg);
+     d3.wordcloud()
+       .size([1200, 600])
+       .selector('#wordcloud')
+       .words([
+         {% for word in words %}
+         {text: '{{ word[0] }}', size: {{ word[1] }}},
+         {% endfor %}
+         {text: '', size: 0}
+       ])
+       .start();
+     document.getElementsByTagName('svg')[0].id = '_id'
+     }, 1000);
+    </script>
+  </body>
+</html>
